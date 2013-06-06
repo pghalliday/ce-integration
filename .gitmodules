@@ -1,3 +1,9 @@
 [submodule "ce-front-end"]
 	path = ce-front-end
 	url = https://github.com/pghalliday/ce-front-end.git
+[submodule "ce-operation-hub"]
+	path = ce-operation-hub
+	url = https://github.com/pghalliday/ce-operation-hub.git
+[submodule "ce-engine"]
+	path = ce-engine
+	url = https://github.com/pghalliday/ce-engine.git

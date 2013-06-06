@@ -14,6 +14,22 @@ Vagrant.configure("2") do |config|
   # enable berkshelf
   config.berkshelf.enabled = true
 
+  config.vm.define "ce-test" do |node|
+    node.vm.hostname = "ce-test"
+    node.vm.network :private_network, ip: "33.33.33.100"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.run_list = [
+        "recipe[ce-test]"
+      ]
+    end
+  end
+
   config.vm.define "ce-load-balancer" do |node|
     node.vm.hostname = "ce-load-balancer"
     node.vm.network :private_network, ip: "33.33.33.50"
@@ -41,22 +57,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_front_end" => {
+          "installDirectory" => "/vagrant/ce-front-end"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-front-end]"
       ]
     end
   end
@@ -72,22 +78,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_front_end" => {
+          "installDirectory" => "/vagrant/ce-front-end"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-front-end]"
       ]
     end
   end
@@ -103,22 +99,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_front_end" => {
+          "installDirectory" => "/vagrant/ce-front-end"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-front-end]"
       ]
     end
   end
@@ -134,22 +120,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_operation_hub" => {
+          "installDirectory" => "/vagrant/ce-operation-hub"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-operation-hub]"
       ]
     end
   end
@@ -165,22 +141,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_engine" => {
+          "installDirectory" => "/vagrant/ce-engine"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-engine]"
       ]
     end
   end
@@ -196,22 +162,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_engine" => {
+          "installDirectory" => "/vagrant/ce-engine"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-engine]"
       ]
     end
   end
@@ -227,22 +183,12 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
-        "nodejs" => {
-          "install_method" => "source",
-          "version" => "0.10.9"
-        },
-        "git" => {
-          "version" => "1.8.3"
-        },
-        "zeromq" => {
-          "version" => "3.2.3",
-          "url" => "http://download.zeromq.org"
+        "ce_engine" => {
+          "installDirectory" => "/vagrant/ce-engine"
         }
       }
       chef.run_list = [
-        "recipe[nodejs]",
-        "recipe[git]",
-        "recipe[zeromq]"
+        "recipe[ce-engine]"
       ]
     end
   end
