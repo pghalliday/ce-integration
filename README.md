@@ -3,15 +3,15 @@ currency-exchange
 
 End to end currency exchange integration
 
-The following VMs will be created
+The following VMs will be created by `Vagrant`
 
 Cookbook | Notes | Instances
 ---|---|:---:
-ce-test | This is the machine on which the tests will be run | `ce-test`
-haproxy | This is the load balancer | `ce-load-balancer`
-ce-front-end | Load balanced ce-front-end instances pre-validate operations before passing them to the ce-operation-hub | `ce-front-end-1` `ce-front-end-2` `ce-front-end-3`
-ce-operation-hub | Single ce-operation-hub instance ensures that the sequence of operations is logged and broadcasts them to the ce-engine instances | `ce-operation-hub`
-ce-engine | Redundant ce-engine instances receive and process the operations | `ce-engine-1` `ce-engine-2` `ce-engine-3`
+`ce-test` | This is the machine on which the tests will be run | `ce-test`
+`haproxy` | This is the load balancer | `ce-load-balancer`
+`ce-front-end` | Load balanced ce-front-end instances pre-validate operations before passing them to the ce-operation-hub | `ce-front-end-1` `ce-front-end-2` `ce-front-end-3`
+`ce-operation-hub` | Single ce-operation-hub instance ensures that the sequence of operations is logged and broadcasts them to the ce-engine instances | `ce-operation-hub`
+`ce-engine` | Redundant ce-engine instances receive and process the operations | `ce-engine-1` `ce-engine-2` `ce-engine-3`
 
 ## Contributing
 
