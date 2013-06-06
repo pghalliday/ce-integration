@@ -1,22 +1,30 @@
 currency-exchange
 =================
 
-End to end currency exchange implementation
+End to end currency exchange integration
 
-The following components make up the end to end system
+The following VMs will be created
 
-- ce-load-balancer - haproxy instance load balancing the ce-front-end instance
-- ce-front-end-1|2|3 - 3 load balanced instances of the front end interface that does initial authentication and validation of operations and queries over a REST interface
-- ce-operation-hub - single nexus for receiving operations from the ce-front-end instances, assigning sequence IDs, logging and broadcasting them to the engine instances and reporting back success or failure
-- ce-engine-1|2|3 - 3 redundant currency market order matching engines
+Cookbook | Notes | Instances
+---|---|:---:
+ce-test | This is the machine on which the tests will be run | `ce-test`
+haproxy | This is the load balancer | `ce-load-balancer`
+ce-front-end | Load balanced ce-front-end instances pre-validate operations before passing them to the ce-operation-hub | `ce-front-end-1` `ce-front-end-2` `ce-front-end-3`
+ce-operation-hub | Single ce-operation-hub instance ensures that the sequence of operations is logged and broadcasts them to the ce-engine instances | `ce-operation-hub`
+ce-engine | Redundant ce-engine instances receive and process the operations | `ce-engine-1` `ce-engine-2` `ce-engine-3`
 
 ## Contributing
 
-Note that this project is an end to end development environment for the various currency exchange components. As such those components are included here as git submodules. After cloning you will need to initialise the submodules
+Note that this project is an end to end development environment for the various currency exchange components. As such those components are included here as git submodules. Clone using the `--recursive` option.
 
 ```
-git submodule init
-git submodule update
+$ git clone --recursive
+```
+
+If you don't then after cloning you will need to initialise the submodules and the submodules of the submodules.
+
+```
+$ git submodule update --init --recursive
 ```
 
 You should then use vagrant (see below) to instantiate VMs for each component and work in them.
