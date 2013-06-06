@@ -35,7 +35,7 @@ For specifics with regard to working in each submodule see their respective READ
 
 ### Prerequisites
 
-- Virtualbox - https://www.virtualbox.org/wiki/Downloads
+- VirtualBox - https://www.virtualbox.org/wiki/Downloads
 - Vagrant - http://downloads.vagrantup.com/
 
 Additionally the following vagrant plugins should be installed
