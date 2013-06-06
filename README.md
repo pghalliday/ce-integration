@@ -33,8 +33,12 @@ NB. Remember to commit the submodules you are working in first before commiting 
 
 For specifics with regard to working in each submodule see their respective README.md
 
-### Using Vagrant
-To use the Vagrantfile you will also need to install the following vagrant plugins
+### Prerequisites
+
+- Virtualbox - https://www.virtualbox.org/wiki/Downloads
+- Vagrant - http://downloads.vagrantup.com/
+
+Additionally the following vagrant plugins should be installed
 
 ```
 $ vagrant plugin install vagrant-omnibus
@@ -42,11 +46,26 @@ $ vagrant plugin install vagrant-berkshelf
 $ vagrant plugin install vagrant-hostmanager
 ```
 
-### Workaround for firewalls that block default git:// port
-As `engine.io-client` has a dependency on a `git://github.com/` url based module `npm install` will fail if the default port for `git://` urls is blocked by a firewall. These urls can be rewritten to `https://github.com/` with this git configuration change
+### Running the tests
+
+- Start all the VMs (this will definitely take a **very** long time the first time it is run)
 
 ```
-$ git config --global url.https://github.com/.insteadOf git://github.com/
+$ cd currency-exchange
+$ vagrant up
+```
+
+- connect to the `ce-test` instance
+
+```
+$ vagrant ssh ce-test
+```
+
+- Run the tests
+
+```
+vagrant@ce-test:~$ cd /vagrant
+vagrant@ce-test:~$ npm test
 ```
 
 ## License
