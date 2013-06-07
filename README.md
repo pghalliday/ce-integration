@@ -55,17 +55,17 @@ $ cd currency-exchange
 $ vagrant up
 ```
 
-- connect to the `ce-test` instance
+- connect to the `test` instance
 
 ```
-$ vagrant ssh ce-test
+$ vagrant ssh test
 ```
 
 - Run the tests
 
 ```
-vagrant@ce-test:~$ cd /vagrant
-vagrant@ce-test:~$ npm test
+vagrant@test:~$ cd /vagrant/test
+vagrant@test:/vagrant/test$ npm test
 ```
 
 ## License
