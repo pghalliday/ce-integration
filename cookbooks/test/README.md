@@ -1,5 +1,5 @@
-cookbook-ce-test
-================
+cookbook-test
+=============
 
 Chef cookbook to set up a currency exchange test runner environment
 

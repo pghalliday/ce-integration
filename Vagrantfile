@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
   # enable berkshelf
   config.berkshelf.enabled = true
 
-  config.vm.define "ce-test" do |node|
-    node.vm.hostname = "ce-test"
+  config.vm.define "test" do |node|
+    node.vm.hostname = "test"
     node.vm.network :private_network, ip: "33.33.33.100"
     node.vm.box = "ubuntu1204"
     node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
@@ -25,13 +25,13 @@ Vagrant.configure("2") do |config|
 
     node.vm.provision :chef_solo do |chef|
       chef.run_list = [
-        "recipe[ce-test]"
+        "recipe[test]"
       ]
     end
   end
 
-  config.vm.define "ce-load-balancer" do |node|
-    node.vm.hostname = "ce-load-balancer"
+  config.vm.define "haproxy" do |node|
+    node.vm.hostname = "haproxy"
     node.vm.network :private_network, ip: "33.33.33.50"
     node.vm.box = "ubuntu1204"
     node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
@@ -40,6 +40,26 @@ Vagrant.configure("2") do |config|
     node.vm.provision :hostmanager
 
     node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "haproxy" => {
+          "members" => [{
+              "hostname" => "ce-front-end-1",
+              "ipaddress" => "33.33.33.51"
+            }, {
+              "hostname" => "ce-front-end-2",
+              "ipaddress" => "33.33.33.52"
+            }, {
+              "hostname" => "ce-front-end-3",
+              "ipaddress" => "33.33.33.53"
+            }
+          ],
+          "member_port" => "3000",
+          "admin" => {
+            "address_bind" => "0.0.0.0",
+            "port" => "8000"
+          }
+        }
+      }
       chef.run_list = [
         "recipe[haproxy]"
       ]
