@@ -14,22 +14,6 @@ Vagrant.configure("2") do |config|
   # enable berkshelf
   config.berkshelf.enabled = true
 
-  config.vm.define "test" do |node|
-    node.vm.hostname = "test"
-    node.vm.network :private_network, ip: "33.33.33.100"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.run_list = [
-        "recipe[test]"
-      ]
-    end
-  end
-
   config.vm.define "haproxy" do |node|
     node.vm.hostname = "haproxy"
     node.vm.network :private_network, ip: "33.33.33.50"
@@ -209,6 +193,22 @@ Vagrant.configure("2") do |config|
       }
       chef.run_list = [
         "recipe[ce-engine]"
+      ]
+    end
+  end
+
+  config.vm.define "test" do |node|
+    node.vm.hostname = "test"
+    node.vm.network :private_network, ip: "33.33.33.100"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.run_list = [
+        "recipe[test]"
       ]
     end
   end
