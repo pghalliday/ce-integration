@@ -8,12 +8,10 @@ install:
   - wget http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
   - sudo apt-get update
   - sudo apt-get -y install user-mode-linux
-  - sudo apt-get -y install virtualbox-4.2
-  - VBoxManage -v
   - wget https://github.com/g2p/vido/archive/v0.2.0.tar.gz
-  - tar -zxf vido-0.2.0.tar.gz
-  - vido-0.2.0/setup.py
-  - vido sudo /etc/init.d/vboxdrv setup
+  - tar -zxf v0.2.0.tar.gz
+  - v0.2.0/setup.py
+  - vido sudo apt-get -y install virtualbox-4.2
   - VBoxManage -v
   - wget http://files.vagrantup.com/packages/7e400d00a3c5a0fdf2809c8b5001a035415a607b/vagrant_1.2.2_x86_64.deb
   - sudo dpkg -i vagrant_1.2.2_x86_64.deb
