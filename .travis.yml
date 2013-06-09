@@ -12,8 +12,8 @@ install:
   - VBoxManage -v
   - wget https://github.com/g2p/vido/archive/v0.2.0.tar.gz
   - tar -zxf v0.2.0.tar.gz
-  - vido-0.2.0/vido apt-get install linux-headers-$(uname -r)
-  - vido-0.2.0/vido /etc/init.d/vboxdrv setup
+  - vido-0.2.0/vido sudo apt-get install linux-headers-$(uname -r)
+  - vido-0.2.0/vido sudo /etc/init.d/vboxdrv setup
   - vido-0.2.0/vido VBoxManage -v
   - wget http://files.vagrantup.com/packages/7e400d00a3c5a0fdf2809c8b5001a035415a607b/vagrant_1.2.2_x86_64.deb
   - sudo dpkg -i vagrant_1.2.2_x86_64.deb
