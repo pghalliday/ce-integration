@@ -62,7 +62,8 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_front_end" => {
-          "installDirectory" => "/vagrant/ce-front-end"
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant"
         }
       }
       chef.run_list = [
@@ -83,7 +84,8 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_front_end" => {
-          "installDirectory" => "/vagrant/ce-front-end"
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant"
         }
       }
       chef.run_list = [
@@ -104,7 +106,8 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_front_end" => {
-          "installDirectory" => "/vagrant/ce-front-end"
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant"
         }
       }
       chef.run_list = [
