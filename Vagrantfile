@@ -63,7 +63,9 @@ Vagrant.configure("2") do |config|
       chef.json = {
         "ce_front_end" => {
           "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant"
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
@@ -85,7 +87,9 @@ Vagrant.configure("2") do |config|
       chef.json = {
         "ce_front_end" => {
           "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant"
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
@@ -107,7 +111,9 @@ Vagrant.configure("2") do |config|
       chef.json = {
         "ce_front_end" => {
           "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant"
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
