@@ -49,29 +49,6 @@ Vagrant.configure("2") do |config|
       ]
     end
   end
-
-  config.vm.define "ce-operation-hub" do |node|
-    node.vm.hostname = "ce-operation-hub"
-    node.vm.network :private_network, ip: "33.33.33.54"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.json = {
-        "ce_operation_hub" => {
-          "destination" => "/vagrant/ce-operation-hub",
-          "user" => "vagrant",
-          "bind_address" => "tcp://33.33.33.54:4000"
-        }
-      }
-      chef.run_list = [
-        "recipe[ce-operation-hub]"
-      ]
-    end
-  end
   
   config.vm.define "ce-front-end-1" do |node|
     node.vm.hostname = "ce-front-end-1"
@@ -88,7 +65,7 @@ Vagrant.configure("2") do |config|
           "destination" => "/vagrant/ce-front-end",
           "user" => "vagrant",
           "port" => "3000",
-          "ce_operation_hub" => "tcp://33.33.33.54:4000"
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
@@ -112,7 +89,7 @@ Vagrant.configure("2") do |config|
           "destination" => "/vagrant/ce-front-end",
           "user" => "vagrant",
           "port" => "3000",
-          "ce_operation_hub" => "tcp://33.33.33.54:4000"
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
@@ -136,11 +113,34 @@ Vagrant.configure("2") do |config|
           "destination" => "/vagrant/ce-front-end",
           "user" => "vagrant",
           "port" => "3000",
-          "ce_operation_hub" => "tcp://33.33.33.54:4000"
+          "ce_operation_hub" => "tcp://ce-operation-hub:4000"
         }
       }
       chef.run_list = [
         "recipe[ce-front-end]"
+      ]
+    end
+  end
+
+  config.vm.define "ce-operation-hub" do |node|
+    node.vm.hostname = "ce-operation-hub"
+    node.vm.network :private_network, ip: "33.33.33.54"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "ce_operation_hub" => {
+          "destination" => "/vagrant/ce-operation-hub",
+          "user" => "vagrant",
+          "bind_address" => "tcp://0.0.0.0:4000"
+        }
+      }
+      chef.run_list = [
+        "recipe[ce-operation-hub]"
       ]
     end
   end
