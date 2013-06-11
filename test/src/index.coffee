@@ -14,10 +14,10 @@ describe 'Currency Exchange', ->
         .expect(200)
         .expect 'hello', done
 
-    describe '/accounts/[account]/orders/', ->
+    describe '/orders/[account]/', ->
       it 'should accept posted orders', (done) ->
         request
-        .post('/accounts/Peter/orders/')
+        .post('/orders/Peter/')
         .set('Accept', 'application/json')
         .send
           bidCurrency: 'EUR'
