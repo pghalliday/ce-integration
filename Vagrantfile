@@ -135,8 +135,7 @@ Vagrant.configure("2") do |config|
       chef.json = {
         "ce_operation_hub" => {
           "destination" => "/vagrant/ce-operation-hub",
-          "user" => "vagrant",
-          "bind_address" => "tcp://0.0.0.0:4000"
+          "user" => "vagrant"
         }
       }
       chef.run_list = [
@@ -157,7 +156,10 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_engine" => {
-          "installDirectory" => "/vagrant/ce-engine"
+          "destination" => "/vagrant/ce-engine",
+          "user" => "vagrant",
+          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
+          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
         }
       }
       chef.run_list = [
@@ -178,7 +180,10 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_engine" => {
-          "installDirectory" => "/vagrant/ce-engine"
+          "destination" => "/vagrant/ce-engine",
+          "user" => "vagrant",
+          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
+          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
         }
       }
       chef.run_list = [
@@ -199,7 +204,10 @@ Vagrant.configure("2") do |config|
     node.vm.provision :chef_solo do |chef|
       chef.json = {
         "ce_engine" => {
-          "installDirectory" => "/vagrant/ce-engine"
+          "destination" => "/vagrant/ce-engine",
+          "user" => "vagrant",
+          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
+          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
         }
       }
       chef.run_list = [

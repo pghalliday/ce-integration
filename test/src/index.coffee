@@ -32,6 +32,7 @@ describe 'Currency Exchange', ->
           order.offerCurrency.should.equal 'BTC'
           order.bidPrice.should.equal '100'
           order.bidAmount.should.equal '50'
-          order.id.should.equal '654321'
+          order.id.should.be.a 'number'
+          order.status.should.equal 'success'
           done()
 
