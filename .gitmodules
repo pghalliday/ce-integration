@@ -7,3 +7,6 @@
 [submodule "ce-engine"]
 	path = ce-engine
 	url = https://github.com/pghalliday/ce-engine.git
+[submodule "ce-delta-hub"]
+	path = ce-delta-hub
+	url = https://github.com/pghalliday/ce-delta-hub.git

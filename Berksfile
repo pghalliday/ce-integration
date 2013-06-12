@@ -6,4 +6,5 @@ cookbook "haproxy", git: "https://github.com/pghalliday/haproxy.git", branch: "m
 cookbook "test", path: "test/cookbooks/test"
 cookbook "ce-front-end", path: "ce-front-end/cookbooks/ce-front-end"
 cookbook "ce-operation-hub", path: "ce-operation-hub/cookbooks/ce-operation-hub"
+cookbook "ce-delta-hub", path: "ce-delta-hub/cookbooks/ce-delta-hub"
 cookbook "ce-engine", path: "ce-engine/cookbooks/ce-engine"

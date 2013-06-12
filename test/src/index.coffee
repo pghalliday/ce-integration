@@ -14,6 +14,19 @@ describe 'Currency Exchange', ->
         .expect(200)
         .expect 'hello', done
 
+    describe '/balances/[account]/', ->
+      it.skip 'should respond to GET requests', (done) ->
+        request
+        .get('/balances/Peter/')
+        .set('Accept', 'application/json')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end (error, response) =>
+          expect(error).to.not.be.ok
+          balances = response.body
+          balances.should.be.an 'object'
+          done()
+
     describe '/deposits/[account]/', ->
       it 'should accept posted deposits', (done) ->
         request

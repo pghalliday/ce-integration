@@ -11,6 +11,7 @@ Cookbook | Notes | Instances
 `haproxy` | This is the load balancer | `haproxy`
 `ce-front-end` | Load balanced ce-front-end instances pre-validate operations before passing them to the ce-operation-hub | `ce-front-end-1` `ce-front-end-2` `ce-front-end-3`
 `ce-operation-hub` | Single ce-operation-hub instance ensures that the sequence of operations is logged and broadcasts them to the ce-engine instances | `ce-operation-hub`
+`ce-delta-hub` | Single ce-delta-hub instance synchronises market state between ce-engine instances and ce-front-end instances | `ce-delta-hub`
 `ce-engine` | Redundant ce-engine instances receive and process the operations | `ce-engine-1` `ce-engine-2` `ce-engine-3`
 
 ## Contributing
