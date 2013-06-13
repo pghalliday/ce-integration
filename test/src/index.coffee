@@ -15,7 +15,7 @@ describe 'Currency Exchange', ->
         .expect 'hello', done
 
     describe '/balances/[account]/', ->
-      it.skip 'should respond to GET requests', (done) ->
+      it 'should respond to GET requests', (done) ->
         request
         .get('/balances/Peter/')
         .set('Accept', 'application/json')
