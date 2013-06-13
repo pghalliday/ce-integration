@@ -14,138 +14,6 @@ Vagrant.configure("2") do |config|
   # enable berkshelf
   config.berkshelf.enabled = true
 
-  config.vm.define "haproxy" do |node|
-    node.vm.hostname = "haproxy"
-    node.vm.network :private_network, ip: "33.33.33.50"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.json = {
-        "haproxy" => {
-          "members" => [{
-              "hostname" => "ce-front-end-1",
-              "ipaddress" => "33.33.33.51"
-            }, {
-              "hostname" => "ce-front-end-2",
-              "ipaddress" => "33.33.33.52"
-            }, {
-              "hostname" => "ce-front-end-3",
-              "ipaddress" => "33.33.33.53"
-            }
-          ],
-          "member_port" => "3000",
-          "admin" => {
-            "address_bind" => "0.0.0.0",
-            "port" => "8000"
-          }
-        }
-      }
-      chef.run_list = [
-        "recipe[haproxy]"
-      ]
-    end
-  end
-  
-  config.vm.define "ce-front-end-1" do |node|
-    node.vm.hostname = "ce-front-end-1"
-    node.vm.network :private_network, ip: "33.33.33.51"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.json = {
-        "ce_front_end" => {
-          "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant",
-          "port" => "3000",
-          "ce_operation_hub" => {
-            "host" => "ce-operation-hub",
-            "port" => "4000"
-          },
-          "ce_delta_hub" => {
-            "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
-          }
-        }
-      }
-      chef.run_list = [
-        "recipe[ce-front-end]"
-      ]
-    end
-  end
-
-  config.vm.define "ce-front-end-2" do |node|
-    node.vm.hostname = "ce-front-end-2"
-    node.vm.network :private_network, ip: "33.33.33.52"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.json = {
-        "ce_front_end" => {
-          "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant",
-          "port" => "3000",
-          "ce_operation_hub" => {
-            "host" => "ce-operation-hub",
-            "port" => "4000"
-          },
-          "ce_delta_hub" => {
-            "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
-          }
-        }
-      }
-      chef.run_list = [
-        "recipe[ce-front-end]"
-      ]
-    end
-  end
-
-  config.vm.define "ce-front-end-3" do |node|
-    node.vm.hostname = "ce-front-end-3"
-    node.vm.network :private_network, ip: "33.33.33.53"
-    node.vm.box = "ubuntu1204"
-    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-
-    # ensure /etc/hosts is updated before provisioning with chef
-    node.vm.provision :hostmanager
-
-    node.vm.provision :chef_solo do |chef|
-      chef.json = {
-        "ce_front_end" => {
-          "destination" => "/vagrant/ce-front-end",
-          "user" => "vagrant",
-          "port" => "3000",
-          "ce_operation_hub" => {
-            "host" => "ce-operation-hub",
-            "port" => "4000"
-          },
-          "ce_delta_hub" => {
-            "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
-          }
-        }
-      }
-      chef.run_list = [
-        "recipe[ce-front-end]"
-      ]
-    end
-  end
-
   config.vm.define "ce-operation-hub" do |node|
     node.vm.hostname = "ce-operation-hub"
     node.vm.network :private_network, ip: "33.33.33.54"
@@ -258,6 +126,138 @@ Vagrant.configure("2") do |config|
       }
       chef.run_list = [
         "recipe[ce-engine]"
+      ]
+    end
+  end
+  
+  config.vm.define "ce-front-end-1" do |node|
+    node.vm.hostname = "ce-front-end-1"
+    node.vm.network :private_network, ip: "33.33.33.51"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "ce_front_end" => {
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "port" => "4000"
+          },
+          "ce_delta_hub" => {
+            "host" => "ce-delta-hub",
+            "subscriber_port" => "5000",
+            "xrequest_port" => "5001"
+          }
+        }
+      }
+      chef.run_list = [
+        "recipe[ce-front-end]"
+      ]
+    end
+  end
+
+  config.vm.define "ce-front-end-2" do |node|
+    node.vm.hostname = "ce-front-end-2"
+    node.vm.network :private_network, ip: "33.33.33.52"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "ce_front_end" => {
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "port" => "4000"
+          },
+          "ce_delta_hub" => {
+            "host" => "ce-delta-hub",
+            "subscriber_port" => "5000",
+            "xrequest_port" => "5001"
+          }
+        }
+      }
+      chef.run_list = [
+        "recipe[ce-front-end]"
+      ]
+    end
+  end
+
+  config.vm.define "ce-front-end-3" do |node|
+    node.vm.hostname = "ce-front-end-3"
+    node.vm.network :private_network, ip: "33.33.33.53"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "ce_front_end" => {
+          "destination" => "/vagrant/ce-front-end",
+          "user" => "vagrant",
+          "port" => "3000",
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "port" => "4000"
+          },
+          "ce_delta_hub" => {
+            "host" => "ce-delta-hub",
+            "subscriber_port" => "5000",
+            "xrequest_port" => "5001"
+          }
+        }
+      }
+      chef.run_list = [
+        "recipe[ce-front-end]"
+      ]
+    end
+  end
+
+  config.vm.define "haproxy" do |node|
+    node.vm.hostname = "haproxy"
+    node.vm.network :private_network, ip: "33.33.33.50"
+    node.vm.box = "ubuntu1204"
+    node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+
+    # ensure /etc/hosts is updated before provisioning with chef
+    node.vm.provision :hostmanager
+
+    node.vm.provision :chef_solo do |chef|
+      chef.json = {
+        "haproxy" => {
+          "members" => [{
+              "hostname" => "ce-front-end-1",
+              "ipaddress" => "33.33.33.51"
+            }, {
+              "hostname" => "ce-front-end-2",
+              "ipaddress" => "33.33.33.52"
+            }, {
+              "hostname" => "ce-front-end-3",
+              "ipaddress" => "33.33.33.53"
+            }
+          ],
+          "member_port" => "3000",
+          "admin" => {
+            "address_bind" => "0.0.0.0",
+            "port" => "8000"
+          }
+        }
+      }
+      chef.run_list = [
+        "recipe[haproxy]"
       ]
     end
   end
