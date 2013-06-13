@@ -1,5 +1,5 @@
-currency-exchange
-=================
+ce-integration
+==============
 
 End to end currency exchange integration
 
@@ -19,7 +19,7 @@ Cookbook | Notes | Instances
 Note that this project is an end to end development environment for the various currency exchange components. As such those components are included here as git submodules. Clone using the `--recursive` option.
 
 ```
-$ git clone --recursive https://github.com/pghalliday/currency-exchange.git
+$ git clone --recursive https://github.com/pghalliday/ce-integration.git
 ```
 
 If you don't then after cloning you will need to initialise the submodules and the submodules of the submodules.
