@@ -72,8 +72,11 @@ Vagrant.configure("2") do |config|
         "ce_engine" => {
           "destination" => "/vagrant/ce-engine",
           "user" => "vagrant",
-          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
-          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "stream" => "4001",
+            "result" => "4002"
+          }
         }
       }
       chef.run_list = [
@@ -96,8 +99,11 @@ Vagrant.configure("2") do |config|
         "ce_engine" => {
           "destination" => "/vagrant/ce-engine",
           "user" => "vagrant",
-          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
-          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "stream" => "4001",
+            "result" => "4002"
+          }
         }
       }
       chef.run_list = [
@@ -120,8 +126,11 @@ Vagrant.configure("2") do |config|
         "ce_engine" => {
           "destination" => "/vagrant/ce-engine",
           "user" => "vagrant",
-          "ce_operation_hub_subscriber" => "tcp://ce-operation-hub:4001",
-          "ce_operation_hub_push" => "tcp://ce-operation-hub:4002"
+          "ce_operation_hub" => {
+            "host" => "ce-operation-hub",
+            "stream" => "4001",
+            "result" => "4002"
+          }
         }
       }
       chef.run_list = [
@@ -147,12 +156,12 @@ Vagrant.configure("2") do |config|
           "port" => "3000",
           "ce_operation_hub" => {
             "host" => "ce-operation-hub",
-            "port" => "4000"
+            "submit" => "4000"
           },
           "ce_delta_hub" => {
             "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
+            "stream" => "5000",
+            "state" => "5001"
           }
         }
       }
@@ -179,12 +188,12 @@ Vagrant.configure("2") do |config|
           "port" => "3000",
           "ce_operation_hub" => {
             "host" => "ce-operation-hub",
-            "port" => "4000"
+            "submit" => "4000"
           },
           "ce_delta_hub" => {
             "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
+            "stream" => "5000",
+            "state" => "5001"
           }
         }
       }
@@ -211,12 +220,12 @@ Vagrant.configure("2") do |config|
           "port" => "3000",
           "ce_operation_hub" => {
             "host" => "ce-operation-hub",
-            "port" => "4000"
+            "submit" => "4000"
           },
           "ce_delta_hub" => {
             "host" => "ce-delta-hub",
-            "subscriber_port" => "5000",
-            "xrequest_port" => "5001"
+            "stream" => "5000",
+            "state" => "5001"
           }
         }
       }
