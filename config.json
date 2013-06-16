@@ -1,0 +1,68 @@
+{
+  "ce-operation-hub": {
+    "ce-front-end": 4000,
+    "ce-engine": {
+      "stream": 4001,
+      "result": 4002
+    }
+  },
+  "ce-delta-hub": {
+    "ce-front-end": {
+      "stream": 5000,
+      "state": 5001
+    }
+  },
+  "ce-engine": [{
+    "ce-operation-hub": {
+      "host": "localhost",
+      "stream": 4001,
+      "result": 4002    
+    }  
+  }, {
+    "ce-operation-hub": {
+      "host": "localhost",
+      "stream": 4001,
+      "result": 4002    
+    }  
+  }, {
+    "ce-operation-hub": {
+      "host": "localhost",
+      "stream": 4001,
+      "result": 4002    
+    }  
+  }],
+  "ce-front-end": [{
+    "port": 3000,
+    "ce-operation-hub": {
+      "host": "localhost",
+      "submit": 4000
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 5000,
+      "state": 5001
+    }
+  }, {
+    "port": 3001,
+    "ce-operation-hub": {
+      "host": "localhost",
+      "submit": 4000
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 5000,
+      "state": 5001
+    }
+  }, {
+    "port": 3002,
+    "ce-operation-hub": {
+      "host": "localhost",
+      "submit": 4000
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 5000,
+      "state": 5001
+    }
+  }]
+}

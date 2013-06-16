@@ -1,3 +1,7 @@
 .DS_Store
 .vagrant
 Berksfile.lock
+node_modules
+err.log
+out.log
+forever.log

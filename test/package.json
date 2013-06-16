@@ -2,6 +2,10 @@
   "name": "test",
   "version": "0.0.0",
   "description": "End to end tests of the currency exchange components",
+  "config": {
+    "host": "haproxy",
+    "port": "80"
+  },
   "scripts": {
     "test": "grunt"
   },

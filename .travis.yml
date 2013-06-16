@@ -1,21 +1,18 @@
-language: python
-python:
-  - "3.3"
+env:
+ - ZMQ="git://github.com/zeromq/zeromq3-x.git -b v3.2.3"
 before_install:
-  - git submodule update --init --recursive
-install:
-  - sudo echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" | sudo tee -a /etc/apt/sources.list
-  - wget http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
-  - sudo apt-get update
-  - sudo apt-get -y install user-mode-linux
-  - sudo apt-get -y install virtualbox-4.2
-  - VBoxManage -v
-  - wget https://github.com/g2p/vido/archive/v0.2.0.tar.gz
-  - tar -zxf v0.2.0.tar.gz
-  - vido-0.2.0/vido sudo apt-get install linux-headers-$(uname -r)
-  - vido-0.2.0/vido sudo /etc/init.d/vboxdrv setup
-  - vido-0.2.0/vido VBoxManage -v
-  - wget http://files.vagrantup.com/packages/7e400d00a3c5a0fdf2809c8b5001a035415a607b/vagrant_1.2.2_x86_64.deb
-  - sudo dpkg -i vagrant_1.2.2_x86_64.deb
-script:
-  - vido-0.2.0/vido vagrant up
+ - sudo apt-get install uuid-dev
+ - git clone --depth 1 $ZMQ zmqlib
+ - cd zmqlib
+ - ./autogen.sh
+ - ./configure
+ - make
+ - sudo make install
+ - sudo /sbin/ldconfig
+ - cd ..
+ - git submodule update --init --recursivelanguage: node_js
+before_script:
+ - git submodule foreach npm install
+ - git submodule foreach npm test
+node_js:
+ - "0.10"

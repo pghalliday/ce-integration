@@ -5,14 +5,18 @@ module.exports = (grunt) ->
     coffee:
       compile:
         expand: true 
-        src: ['integration/**/*.coffee']
+        src: ['src/**/*.coffee', 'test/**/*.coffee']
         dest: 'lib'
         ext: '.js'
     mochaTest:
       test:
         options: 
           reporter: 'spec'
-        src: ['lib/integration/**/*.js']
+        src: ['lib/test/src/**/*.js']
+      integration:
+        options: 
+          reporter: 'spec'
+        src: ['lib/test/integration/**/*.js']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -21,5 +25,9 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', [
     'clean'
     'coffee'
-    'mochaTest'
+    'mochaTest:test'
+  ]
+
+  grunt.registerTask 'integration', [
+    'mochaTest:integration'
   ]

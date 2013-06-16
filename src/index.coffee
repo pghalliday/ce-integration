@@ -1,0 +1,36 @@
+cwd = process.cwd()
+CeOperationHub = require cwd + '/ce-operation-hub/lib/src/Server.js'
+CeDeltaHub = require cwd + '/ce-delta-hub/lib/src/Server.js'
+CeEngine = require cwd + '/ce-engine/lib/src/Server.js'
+CeFrontEnd = require cwd + '/ce-front-end/lib/src/Server.js'
+nconf = require 'nconf'
+step = require 'step'
+
+# load configuration
+nconf.argv()
+config = nconf.get 'config'
+if config
+  nconf.file
+    file: config
+
+console.log nconf.get()
+
+step ->
+  group = this.group()
+  ceOperationHub = new CeOperationHub nconf.get 'ce-operation-hub'
+  ceOperationHub.start group()
+  ceDeltaHub = new CeDeltaHub nconf.get 'ce-delta-hub'
+  ceDeltaHub.start group()
+  nconf.get('ce-engine').forEach (config) ->
+    ceEngine = new CeEngine config
+    ceEngine.start group()
+  nconf.get('ce-front-end').forEach (config) ->
+    ceFrontEnd  = new CeFrontEnd config
+    ceFrontEnd.start group()
+, (error, started) ->
+  if error
+    console.log error
+    started.forEach (server) ->
+      server.stop()
+  else
+    console.log 'Currency Exchange started'
