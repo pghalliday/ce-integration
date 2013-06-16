@@ -10,9 +10,10 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
- - git submodule update --init --recursivelanguage: node_js
+ - git submodule update --init --recursive
 before_script:
  - git submodule foreach npm install
  - git submodule foreach npm test
+language: node_js
 node_js:
  - "0.10"
