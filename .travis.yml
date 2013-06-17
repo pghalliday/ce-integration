@@ -20,7 +20,7 @@ before_script:
  - cd test-runners/standalone
  - npm install
  - npm start
- - cd ..
+ - cd ../..
  - sudo /etc/init.d/haproxy start
 script:
  - cd test-runners/standalone
