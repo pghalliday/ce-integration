@@ -1,8 +1,7 @@
-cwd = process.cwd()
-CeOperationHub = require cwd + '/../../ce-operation-hub/lib/src/Server.js'
-CeDeltaHub = require cwd + '/../../ce-delta-hub/lib/src/Server.js'
-CeEngine = require cwd + '/../../ce-engine/lib/src/Server.js'
-CeFrontEnd = require cwd + '/../../ce-front-end/lib/src/Server.js'
+CeOperationHub = require '/ce-operation-hub/lib/src/Server.js'
+CeDeltaHub = require '/ce-delta-hub/lib/src/Server.js'
+CeEngine = require '/ce-engine/lib/src/Server.js'
+CeFrontEnd = require '/ce-front-end/lib/src/Server.js'
 nconf = require 'nconf'
 step = require 'step'
 

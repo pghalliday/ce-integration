@@ -13,15 +13,19 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
+ - sudo ln -s test /test
+ - sudo ln -s ce-delta-hub /ce-delta-hub
+ - sudo ln -s ce-engine /ce-engine
+ - sudo ln -s ce-front-end /ce-front-end
+ - sudo ln -s ce-operation-hub /ce-operation-hub
  - git submodule update --init --recursive
-before_script:
  - git submodule foreach npm install
  - git submodule foreach npm test
+before_script:
  - cd test-runners/standalone
  - npm install
  - npm start
  - cd ../..
- - sudo ln -s test /test
  - sudo /etc/init.d/haproxy start
 script:
  - cd test-runners/standalone
