@@ -16,6 +16,8 @@ before_install:
  - pwd
  - echo $pwd
  - echo $(pwd)
+ - echo $TRAVIS_BUILD_DIR
+ - echo $(TRAVIS_BUILD_DIR)
  - sudo ln -t / -s $pwd/test $pwd/ce-delta-hub $pwd/ce-engine $pwd/ce-front-end $pwd/ce-operation-hub
  - ls /test
  - git submodule update --init --recursive
