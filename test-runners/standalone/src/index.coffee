@@ -28,7 +28,7 @@ step ->
     ceFrontEnd.start group()
 , (error, started) ->
   if error
-    console.log error
+    console.trace error
     started.forEach (server) ->
       server.stop()
   else
