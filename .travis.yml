@@ -13,12 +13,12 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
- - sudo ln test /test
- - ls -la /test
- - sudo ln ce-delta-hub /ce-delta-hub
- - sudo ln ce-engine /ce-engine
- - sudo ln ce-front-end /ce-front-end
- - sudo ln ce-operation-hub /ce-operation-hub
+ - sudo ln -s test /test
+ - sudo ln -s ce-delta-hub /ce-delta-hub
+ - ls /ce-delta-hub/src
+ - sudo ln -s ce-engine /ce-engine
+ - sudo ln -s ce-front-end /ce-front-end
+ - sudo ln -s ce-operation-hub /ce-operation-hub
  - git submodule update --init --recursive
  - git submodule foreach npm install
  - git submodule foreach npm test
