@@ -129,14 +129,16 @@ vagrant@test-runner:/vagrant$ npm test
 - To work in the components
 
 ```
-vagrant@[component-name]:~$ cd /[component-name]
-vagrant@[component-name]:/[component-name]$ npm test
+vagrant@test-runner:~$ cd /[component-name]
+vagrant@test-runner:/[component-name]$ npm test
 ```
 
 - After changes it will be necessary to restart the server instances before re-running the tests
 
 ```
+vagrant@test-runner:~$ cd /vagrant
 vagrant@test-runner:/vagrant$ npm restart
+vagrant@test-runner:/vagrant$ npm test
 ```
 
 ## License
