@@ -32,17 +32,6 @@
     }  
   }],
   "ce-front-end": [{
-    "port": 3000,
-    "ce-operation-hub": {
-      "host": "localhost",
-      "submit": 4000
-    },
-    "ce-delta-hub": {
-      "host": "localhost",
-      "stream": 5000,
-      "state": 5001
-    }
-  }, {
     "port": 3001,
     "ce-operation-hub": {
       "host": "localhost",
@@ -55,6 +44,17 @@
     }
   }, {
     "port": 3002,
+    "ce-operation-hub": {
+      "host": "localhost",
+      "submit": 4000
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 5000,
+      "state": 5001
+    }
+  }, {
+    "port": 3003,
     "ce-operation-hub": {
       "host": "localhost",
       "submit": 4000

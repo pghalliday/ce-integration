@@ -10,9 +10,7 @@
     "prestart": "grunt",
     "start": "forever start -a -l ./forever.log -o ./out.log -e ./err.log  lib/src/index.js --config config.json",
     "stop": "forever stop lib/src/index.js",
-    "pretest": "npm start",
-    "test": "grunt integration",
-    "posttest": "npm stop"
+    "test": "grunt integration"
   },
   "author": "Peter Halliday",
   "license": "MIT",

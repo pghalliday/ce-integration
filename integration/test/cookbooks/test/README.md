@@ -9,8 +9,6 @@ Chef cookbook to set up a currency exchange test runner environment
 
 ## Attributes
 
-- `node[:test][:installDirectory]` - the directory in which the tests exist (defaults to "/vagrant/test")
-
 ## Recipes
 
 ### default

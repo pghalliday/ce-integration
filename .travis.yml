@@ -1,6 +1,9 @@
 env:
  - ZMQ="git://github.com/zeromq/zeromq3-x.git -b v3.2.3"
 before_install:
+ - sudo apt-get install haproxy
+ - sudo cp -f haproxy.cfg /etc/haproxy/
+ - sudo etc/init.d/haproxy restart
  - sudo apt-get install uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
  - cd zmqlib
@@ -14,6 +17,13 @@ before_install:
 before_script:
  - git submodule foreach npm install
  - git submodule foreach npm test
+ - cd integration
+ - npm install
+ - npm start
+ - cd ..
+script:
+ - cd integration
+ - npm test
 language: node_js
 node_js:
  - "0.10"

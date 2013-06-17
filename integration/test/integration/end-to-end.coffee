@@ -5,10 +5,6 @@ supertest = require 'supertest'
 
 describe 'Currency Exchange', ->
   describe 'REST API', ->
-
-    console.log process.env.npm_package_config_host
-    console.log process.env.npm_package_config_port
-
     request = supertest 'http://' + process.env.npm_package_config_host + ':' + process.env.npm_package_config_port
 
     describe '/', ->
