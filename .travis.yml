@@ -24,6 +24,8 @@ before_script:
  - cd ..
 script:
  - cd integration
+ - cat out.log
+ - cat err.log
  - npm test
 language: node_js
 node_js:
