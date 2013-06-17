@@ -1,6 +1,8 @@
 ce-integration
 ==============
 
+[![Build Status](https://travis-ci.org/pghalliday/ce-integration.png?branch=master)](https://travis-ci.org/pghalliday/ce-integration)
+
 End to end currency exchange integration
 
 The following VMs will be created by `Vagrant`
