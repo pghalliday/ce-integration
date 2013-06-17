@@ -3,7 +3,7 @@ env:
 before_install:
  - sudo apt-get install haproxy
  - sudo cp -f integration/haproxy.cfg /etc/haproxy/
- - sudo etc/init.d/haproxy restart
+ - sudo /etc/init.d/haproxy restart
  - sudo apt-get install uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
  - cd zmqlib
