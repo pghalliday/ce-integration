@@ -76,12 +76,6 @@ vagrant@test-runner:~$ cd /vagrant
 vagrant@test-runner:/vagrant$ npm test
 ```
 
-- The tests are always run when the VMs are reloaded. As such re-running the end to end tests after changes can be achieved through
-
-```
-$ vagrant reload
-```
-
 - To work in the components
 
 ```
