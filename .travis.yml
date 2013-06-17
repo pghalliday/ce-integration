@@ -4,7 +4,6 @@ before_install:
  - sudo apt-get install haproxy
  - sudo cp -f integration/haproxy/haproxy.cfg /etc/haproxy/
  - sudo cp -f integration/haproxy/haproxy /etc/default/
- - sudo /etc/init.d/haproxy start
  - sudo apt-get install uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
  - cd zmqlib
@@ -22,6 +21,7 @@ before_script:
  - npm install
  - npm start
  - cd ..
+ - sudo /etc/init.d/haproxy start
 script:
  - cd integration
  - cat out.log
