@@ -14,8 +14,8 @@ before_install:
  - sudo /sbin/ldconfig
  - cd ..
  - sudo ln -s test /test
+ - ls /test
  - sudo ln -s ce-delta-hub /ce-delta-hub
- - ls /ce-delta-hub/src
  - sudo ln -s ce-engine /ce-engine
  - sudo ln -s ce-front-end /ce-front-end
  - sudo ln -s ce-operation-hub /ce-operation-hub
