@@ -1,6 +1,12 @@
 env:
  - ZMQ="git://github.com/zeromq/zeromq3-x.git -b v3.2.3"
 before_install:
+ - sudo ln -s $TRAVIS_BUILD_DIR/test /test
+ - sudo ln -s $TRAVIS_BUILD_DIR/ce-delta-hub /ce-delta-hub
+ - sudo ln -s $TRAVIS_BUILD_DIR/ce-engine /ce-engine
+ - sudo ln -s $TRAVIS_BUILD_DIR/ce-front-end /ce-front-end
+ - sudo ln -s $TRAVIS_BUILD_DIR/ce-operation-hub /ce-operation-hub
+ - ls /test
  - sudo apt-get install haproxy
  - sudo cp -f test-runners/standalone/haproxy/haproxy.cfg /etc/haproxy/
  - sudo cp -f test-runners/standalone/haproxy/haproxy /etc/default/
@@ -13,13 +19,6 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
- - pwd
- - echo $pwd
- - echo $(pwd)
- - echo $TRAVIS_BUILD_DIR
- - echo $(TRAVIS_BUILD_DIR)
- - sudo ln -t / -s $pwd/test $pwd/ce-delta-hub $pwd/ce-engine $pwd/ce-front-end $pwd/ce-operation-hub
- - ls /test
  - git submodule update --init --recursive
  - git submodule foreach npm install
  - git submodule foreach npm test
