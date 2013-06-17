@@ -1,0 +1,6 @@
+npm-debug.log
+.DS_Store
+.vagrant
+Berksfile.lock
+node_modules
+lib

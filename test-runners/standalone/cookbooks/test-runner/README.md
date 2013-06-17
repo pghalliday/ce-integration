@@ -1,4 +1,4 @@
-cookbook-integration
+cookbook-test-runner
 ====================
 
 Chef cookbook to set up a currency exchange integration environment

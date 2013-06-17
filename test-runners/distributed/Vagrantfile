@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-operation-hub", "/ce-operation-hub"
+    node.vm.synced_folder "../../ce-operation-hub", "/ce-operation-hub"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-delta-hub", "/ce-delta-hub"
+    node.vm.synced_folder "../../ce-delta-hub", "/ce-delta-hub"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-engine", "/ce-engine"
+    node.vm.synced_folder "../../ce-engine", "/ce-engine"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -100,7 +100,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-engine", "/ce-engine"
+    node.vm.synced_folder "../../ce-engine", "/ce-engine"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -129,7 +129,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-engine", "/ce-engine"
+    node.vm.synced_folder "../../ce-engine", "/ce-engine"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -158,7 +158,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-front-end", "/ce-front-end"
+    node.vm.synced_folder "../../ce-front-end", "/ce-front-end"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -192,7 +192,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-front-end", "/ce-front-end"
+    node.vm.synced_folder "../../ce-front-end", "/ce-front-end"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -226,7 +226,7 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "ce-front-end", "/ce-front-end"
+    node.vm.synced_folder "../../ce-front-end", "/ce-front-end"
 
     node.vm.provision :chef_solo do |chef|
       chef.json = {
@@ -287,8 +287,8 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "test" do |node|
-    node.vm.hostname = "test"
+  config.vm.define "test-runner" do |node|
+    node.vm.hostname = "test-runner"
     node.vm.network :private_network, ip: "33.33.33.100"
     node.vm.box = "ubuntu1204"
     node.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
@@ -296,11 +296,11 @@ Vagrant.configure("2") do |config|
     # ensure /etc/hosts is updated before provisioning with chef
     node.vm.provision :hostmanager
 
-    node.vm.synced_folder "integration/test", "/test"
+    node.vm.synced_folder "../../test", "/test"
 
     node.vm.provision :chef_solo do |chef|
       chef.run_list = [
-        "recipe[test]"
+        "recipe[test-runner]"
       ]
     end
   end

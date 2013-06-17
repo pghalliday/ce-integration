@@ -20,7 +20,7 @@ default[:haproxy][:admin] = {
   "address_bind" => "0.0.0.0",
   "port" => "8000"
 }
-default[:haproxy][:conf_dir] = "/integration/haproxy"
+default[:haproxy][:conf_dir] = "/vagrant/haproxy"
 
 default[:zeromq][:version] = "3.2.3"
 default[:zeromq][:url] = "http://download.zeromq.org"

@@ -1,28 +1,28 @@
 module.exports = (grunt) ->
   grunt.initConfig
     clean: 
-      local: ['lib']
-      integration: ['lib/test/integration']
+      local: ['lib/local']
+      integration: ['lib/integration']
     coffee:
       local:
         expand: true 
-        src: ['src/**/*.coffee', 'test/src/**/*.coffee']
-        dest: 'lib'
+        src: ['src/**/*.coffee', 'test/**/*.coffee']
+        dest: 'lib/local'
         ext: '.js'
       integration:
         expand: true 
-        src: ['test/integration/**/*.coffee']
-        dest: 'lib'
+        src: ['/test/**/*.coffee']
+        dest: 'lib/integration'
         ext: '.js'
     mochaTest:
       local:
         options: 
           reporter: 'spec'
-        src: ['lib/test/src/**/*.js']
+        src: ['lib/local/test/**/*.js']
       integration:
         options: 
           reporter: 'spec'
-        src: ['lib/test/integration/**/*.js']
+        src: ['lib/integration/**/*.js']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prestart": "grunt",
-    "start": "forever start -a -l ./forever.log -o ./out.log -e ./err.log  lib/src/index.js --config config.json",
+    "start": "forever start -a -l ./forever.log -o ./out.log -e ./err.log  lib/local/src/index.js --config config.json",
     "stop": "forever stop lib/src/index.js",
     "test": "grunt integration"
   },
