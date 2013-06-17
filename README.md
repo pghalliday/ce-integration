@@ -133,7 +133,7 @@ vagrant@test-runner:~$ cd /[component-name]
 vagrant@test-runner:/[component-name]$ npm test
 ```
 
-- After changes it will be necessary to restart the server instances before re-running the tests
+- After changes it will be necessary to restart the server instances before re-running the end to end tests
 
 ```
 vagrant@test-runner:~$ cd /vagrant
