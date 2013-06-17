@@ -13,6 +13,9 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
+ - pwd
+ - echo $pwd
+ - echo $(pwd)
  - sudo ln -t / -s $pwd/test $pwd/ce-delta-hub $pwd/ce-engine $pwd/ce-front-end $pwd/ce-operation-hub
  - ls /test
  - git submodule update --init --recursive
