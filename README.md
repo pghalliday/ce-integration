@@ -138,5 +138,5 @@ vagrant@test-runner:/vagrant$ npm test
 ```
 
 ## License
-Copyright (c) 2013 Peter Halliday  
+Copyright &copy; 2013 Peter Halliday  
 Licensed under the MIT license.
