@@ -8,9 +8,11 @@ supertest = require 'supertest'
 describe 'ce-integration', ->
   it.skip 'should start an end to end system', (done) ->
     this.timeout 5000
-    request = supertest 'http://localhost:3000'
+    request = supertest 'http://localhost:7000'
     childDaemon = new ChildDaemon 'node', [
-      'lib/src/index.js'
+      'lib/local/src/index.js'
+      '--config'
+      'test/support/config.json'
     ], new RegExp 'Currency Exchange started'
     childDaemon.start (error, matched) =>
       expect(error).to.not.be.ok
@@ -20,6 +22,7 @@ describe 'ce-integration', ->
       .expect(200)
       .expect('Content-Type', /json/)
       .end (error, response) =>
+        expect(error).to.not.be.ok
         oldBalance = parseFloat response.body
         request
         .post('/deposits/Peter/')
@@ -31,11 +34,13 @@ describe 'ce-integration', ->
         .expect('Content-Type', /json/)
         .end (error, response) =>
           expect(error).to.not.be.ok
-          deposit = response.body
+          operation = response.body
+          operation.account.should.equal 'Peter'
+          operation.id.should.be.a 'number'
+          operation.result.should.equal 'success'
+          deposit = operation.deposit
           deposit.currency.should.equal 'EUR'
           deposit.amount.should.equal '50'
-          deposit.id.should.be.a 'number'
-          deposit.status.should.equal 'success'
           setTimeout =>
             request
             .get('/balances/Peter/EUR')
@@ -43,6 +48,7 @@ describe 'ce-integration', ->
             .expect(200)
             .expect('Content-Type', /json/)
             .end (error, response) =>
+              expect(error).to.not.be.ok
               newBalance = parseFloat response.body
               newBalance.should.equal oldBalance + 50
               childDaemon.stop (error) =>

@@ -60,11 +60,13 @@ describe 'Currency Exchange', ->
           .expect('Content-Type', /json/)
           .end (error, response) =>
             expect(error).to.not.be.ok
-            deposit = response.body
+            operation = response.body
+            operation.account.should.equal 'Peter'
+            operation.id.should.be.a 'number'
+            operation.result.should.equal 'success'
+            deposit = operation.deposit
             deposit.currency.should.equal 'EUR'
             deposit.amount.should.equal '50'
-            deposit.id.should.be.a 'number'
-            deposit.status.should.equal 'success'
             setTimeout =>
               request
               .get('/balances/Peter/EUR')
@@ -91,13 +93,15 @@ describe 'Currency Exchange', ->
         .expect('Content-Type', /json/)
         .end (error, response) =>
           expect(error).to.not.be.ok
-          order = response.body
+          operation = response.body
+          operation.account.should.equal 'Peter'
+          operation.id.should.be.a 'number'
+          operation.result.should.equal 'success'
+          order = operation.order
           order.bidCurrency.should.equal 'EUR'
           order.offerCurrency.should.equal 'BTC'
           order.bidPrice.should.equal '100'
           order.bidAmount.should.equal '50'
-          order.id.should.be.a 'number'
-          order.status.should.equal 'success'
           done()
 
 

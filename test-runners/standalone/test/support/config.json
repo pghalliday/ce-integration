@@ -1,0 +1,41 @@
+{
+  "ce-operation-hub": {
+    "ce-front-end": 7001,
+    "ce-engine": {
+      "stream": 7002,
+      "result": 7003
+    }
+  },
+  "ce-delta-hub": {
+    "ce-front-end": {
+      "stream": 7004,
+      "state": 7005
+    },
+    "ce-engine": {
+      "stream": 7006
+    }
+  },
+  "ce-engine": [{
+    "ce-operation-hub": {
+      "host": "localhost",
+      "stream": 7002,
+      "result": 7003    
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 7006
+    }
+  }],
+  "ce-front-end": [{
+    "port": 7000,
+    "ce-operation-hub": {
+      "host": "localhost",
+      "submit": 7001
+    },
+    "ce-delta-hub": {
+      "host": "localhost",
+      "stream": 7004,
+      "state": 7005
+    }
+  }]
+}
