@@ -37,11 +37,11 @@ describe 'Currency Exchange', ->
         .end (error, response) =>
           expect(error).to.not.be.ok
           balance = response.body
-          balance.should.equal '0'
+          balance.should.be.a 'string'
           done()
 
     describe '/deposits/[account]/', ->
-      it.skip 'should accept posted deposits which should be visible through a balance query within 250 milliseconds', (done) ->
+      it 'should accept posted deposits which should be visible through a balance query within 250 milliseconds', (done) ->
         # get current balances
         request
         .get('/balances/Peter/EUR')
@@ -67,17 +67,34 @@ describe 'Currency Exchange', ->
             deposit = operation.deposit
             deposit.currency.should.equal 'EUR'
             deposit.amount.should.equal '50'
-            setTimeout =>
-              request
-              .get('/balances/Peter/EUR')
-              .set('Accept', 'application/json')
-              .expect(200)
-              .expect('Content-Type', /json/)
-              .end (error, response) =>
-                newBalance = parseFloat response.body
-                newBalance.should.equal oldBalance + 50
-                done()
-            , 250
+            request
+            .post('/deposits/Peter/')
+            .set('Accept', 'application/json')
+            .send
+              currency: 'EUR'
+              amount: '150'
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end (error, response) =>
+              expect(error).to.not.be.ok
+              operation = response.body
+              operation.account.should.equal 'Peter'
+              operation.id.should.be.a 'number'
+              operation.result.should.equal 'success'
+              deposit = operation.deposit
+              deposit.currency.should.equal 'EUR'
+              deposit.amount.should.equal '150'
+              setTimeout =>
+                request
+                .get('/balances/Peter/EUR')
+                .set('Accept', 'application/json')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end (error, response) =>
+                  newBalance = parseFloat response.body
+                  newBalance.should.equal oldBalance + 200
+                  done()
+              , 250
 
     describe '/orders/[account]/', ->
       it 'should accept posted orders', (done) ->

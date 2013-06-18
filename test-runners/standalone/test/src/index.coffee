@@ -6,7 +6,7 @@ ChildDaemon = require 'child-daemon'
 supertest = require 'supertest'
 
 describe 'ce-integration', ->
-  it.skip 'should start an end to end system', (done) ->
+  it 'should start an end to end system', (done) ->
     this.timeout 5000
     request = supertest 'http://localhost:7000'
     childDaemon = new ChildDaemon 'node', [
