@@ -114,11 +114,11 @@ describe 'Currency Exchange', ->
           operation.account.should.equal 'Peter'
           operation.id.should.be.a 'number'
           operation.result.should.equal 'success'
-          order = operation.order
-          order.bidCurrency.should.equal 'EUR'
-          order.offerCurrency.should.equal 'BTC'
-          order.bidPrice.should.equal '100'
-          order.bidAmount.should.equal '50'
+          submit = operation.submit
+          submit.bidCurrency.should.equal 'EUR'
+          submit.offerCurrency.should.equal 'BTC'
+          submit.bidPrice.should.equal '100'
+          submit.bidAmount.should.equal '50'
           done()
 
 
