@@ -1,6 +1,8 @@
 {
   "ce-operation-hub": {
-    "ce-front-end": 4000,
+    "ce-front-end": {
+      "submit": 4000
+    },
     "ce-engine": {
       "stream": 4001,
       "result": 4002
