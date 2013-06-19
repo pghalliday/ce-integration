@@ -1,7 +1,7 @@
-CeOperationHub = require '/ce-operation-hub/lib/src/Server.js'
-CeDeltaHub = require '/ce-delta-hub/lib/src/Server.js'
-CeEngine = require '/ce-engine/lib/src/Server.js'
-CeFrontEnd = require '/ce-front-end/lib/src/Server.js'
+CeOperationHub = require '/ce-operation-hub'
+CeDeltaHub = require '/ce-delta-hub'
+CeEngine = require '/ce-engine'
+CeFrontEnd = require '/ce-front-end'
 nconf = require 'nconf'
 step = require 'step'
 
