@@ -36,7 +36,7 @@ describe 'ce-integration', ->
           expect(error).to.not.be.ok
           operation = response.body
           operation.account.should.equal 'Peter'
-          operation.id.should.be.a 'number'
+          operation.sequence.should.be.a 'number'
           operation.result.should.equal 'success'
           deposit = operation.deposit
           deposit.currency.should.equal 'EUR'

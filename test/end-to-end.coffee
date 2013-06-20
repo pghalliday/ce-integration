@@ -64,7 +64,7 @@ describe 'Currency Exchange', ->
             operation = response.body
             operation.reference.should.be.a 'string'
             operation.account.should.equal 'Peter'
-            operation.id.should.be.a 'number'
+            operation.sequence.should.be.a 'number'
             operation.timestamp.should.be.at.least startTime
             operation.timestamp.should.be.at.most Date.now()
             operation.result.should.equal 'success'
@@ -83,7 +83,7 @@ describe 'Currency Exchange', ->
               expect(error).to.not.be.ok
               operation = response.body
               operation.account.should.equal 'Peter'
-              operation.id.should.be.a 'number'
+              operation.sequence.should.be.a 'number'
               operation.result.should.equal 'success'
               deposit = operation.deposit
               deposit.currency.should.equal 'EUR'
@@ -118,7 +118,7 @@ describe 'Currency Exchange', ->
           operation = response.body
           operation.reference.should.be.a 'string'
           operation.account.should.equal 'Peter'
-          operation.id.should.be.a 'number'
+          operation.sequence.should.be.a 'number'
           operation.timestamp.should.be.at.least startTime
           operation.timestamp.should.be.at.most Date.now()
           operation.result.should.equal 'success'
