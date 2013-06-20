@@ -17,5 +17,5 @@ Chef cookbook to set up a currency exchange integration environment
 Installs Node.js and haproxy, runs npm install for the other components and itself then runs npm test for the other components and itself
 
 ## License
-Copyright (c) 2013 Peter Halliday  
+Copyright &copy; 2013 Peter Halliday  
 Licensed under the MIT license.
