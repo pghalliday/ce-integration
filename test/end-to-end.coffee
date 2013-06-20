@@ -42,6 +42,7 @@ describe 'Currency Exchange', ->
 
     describe '/deposits/[account]/', ->
       it 'should accept posted deposits which should be visible through a balance query within 250 milliseconds', (done) ->
+        startTime = Date.now()
         # get current balances
         request
         .get('/balances/Peter/EUR')
@@ -61,8 +62,11 @@ describe 'Currency Exchange', ->
           .end (error, response) =>
             expect(error).to.not.be.ok
             operation = response.body
+            operation.reference.should.be.a 'string'
             operation.account.should.equal 'Peter'
             operation.id.should.be.a 'number'
+            operation.timestamp.should.be.at.least startTime
+            operation.timestamp.should.be.at.most Date.now()
             operation.result.should.equal 'success'
             deposit = operation.deposit
             deposit.currency.should.equal 'EUR'
@@ -98,6 +102,7 @@ describe 'Currency Exchange', ->
 
     describe '/orders/[account]/', ->
       it 'should accept posted orders', (done) ->
+        startTime = Date.now()
         request
         .post('/orders/Peter/')
         .set('Accept', 'application/json')
@@ -111,8 +116,11 @@ describe 'Currency Exchange', ->
         .end (error, response) =>
           expect(error).to.not.be.ok
           operation = response.body
+          operation.reference.should.be.a 'string'
           operation.account.should.equal 'Peter'
           operation.id.should.be.a 'number'
+          operation.timestamp.should.be.at.least startTime
+          operation.timestamp.should.be.at.most Date.now()
           operation.result.should.equal 'success'
           submit = operation.submit
           submit.bidCurrency.should.equal 'EUR'
