@@ -16,7 +16,8 @@
       "state": 7006
     },
     "ce-engine": {
-      "stream": 7007
+      "stream": 7007,
+      "state": 7008
     }
   },
   "ce-engine": [{
@@ -28,7 +29,8 @@
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 7007
+      "stream": 7007,
+      "state": 7008
     }
   }],
   "ce-front-end": [{

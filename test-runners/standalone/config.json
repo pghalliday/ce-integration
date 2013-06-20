@@ -16,7 +16,8 @@
       "state": 5001
     },
     "ce-engine": {
-      "stream": 5002
+      "stream": 5002,
+      "state": 5003
     }
   },
   "ce-engine": [{
@@ -28,7 +29,8 @@
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 5002
+      "stream": 5002,
+      "state": 5003
     }
   }, {
     "ce-operation-hub": {
@@ -39,7 +41,8 @@
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 5002
+      "stream": 5002,
+      "state": 5003
     }  
   }, {
     "ce-operation-hub": {
@@ -50,7 +53,8 @@
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 5002
+      "stream": 5002,
+      "state": 5003
     }  
   }],
   "ce-front-end": [{
