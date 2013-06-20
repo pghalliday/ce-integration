@@ -1,7 +1,7 @@
-ce-integration
+currency-exchange
 ==============
 
-[![Build Status](https://travis-ci.org/pghalliday/ce-integration.png?branch=master)](https://travis-ci.org/pghalliday/ce-integration)
+[![Build Status](https://travis-ci.org/pghalliday/currency-exchange.png?branch=master)](https://travis-ci.org/pghalliday/currency-exchange)
 
 End to end currency exchange integration
 
@@ -21,7 +21,7 @@ Cookbook | Notes | Instances
 Note that this project is an end to end development environment for the various currency exchange components. As such those components are included here as git submodules. Clone using the `--recursive` option.
 
 ```
-$ git clone --recursive https://github.com/pghalliday/ce-integration.git
+$ git clone --recursive https://github.com/pghalliday/currency-exchange.git
 ```
 
 If you don't then after cloning you will need to initialise the submodules and the submodules of the submodules.
@@ -58,7 +58,7 @@ This should be the default method of running end to end tests as it is the most 
 - Start all the VMs (this will definitely take a **very** long time the first time it is run)
 
 ```
-$ cd ce-integration
+$ cd currency-exchange
 $ cd test-runners/distributed
 $ vagrant up
 ```
@@ -104,7 +104,7 @@ This is a less memory intensive test runner as it uses only 1 VM. It is also use
 - Start the VM
 
 ```
-$ cd ce-integration
+$ cd currency-exchange
 $ cd test-runners/standalone
 $ vagrant up
 ```
