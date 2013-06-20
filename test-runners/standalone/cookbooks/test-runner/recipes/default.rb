@@ -1,5 +1,4 @@
 include_recipe "nodejs"
-include_recipe "haproxy"
 include_recipe "zeromq"
 
 bash "build and start the end to end components" do
@@ -11,6 +10,8 @@ bash "build and start the end to end components" do
     su -l vagrant -c "cd /vagrant && npm install && npm start"
   EOH
 end
+
+include_recipe "haproxy"
 
 bash "npm test" do
   code <<-EOH
