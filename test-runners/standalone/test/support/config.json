@@ -5,27 +5,30 @@
     },
     "ce-engine": {
       "stream": 7002,
-      "result": 7003
+      "history": 7003,
+      "result": 7004,
+      "timeout": 2000
     }
   },
   "ce-delta-hub": {
     "ce-front-end": {
-      "stream": 7004,
-      "state": 7005
+      "stream": 7005,
+      "state": 7006
     },
     "ce-engine": {
-      "stream": 7006
+      "stream": 7007
     }
   },
   "ce-engine": [{
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 7002,
-      "result": 7003    
+      "history": 7003,
+      "result": 7004
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 7006
+      "stream": 7007
     }
   }],
   "ce-front-end": [{
@@ -36,8 +39,8 @@
     },
     "ce-delta-hub": {
       "host": "localhost",
-      "stream": 7004,
-      "state": 7005
+      "stream": 7005,
+      "state": 7006
     }
   }]
 }
