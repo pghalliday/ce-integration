@@ -5,7 +5,9 @@
     },
     "ce-engine": {
       "stream": 4001,
-      "result": 4002
+      "history": 4002,
+      "result": 4003,
+      "timeout": 2000
     }
   },
   "ce-delta-hub": {
@@ -21,7 +23,8 @@
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
-      "result": 4002    
+      "history": 4002,
+      "result": 4003    
     },
     "ce-delta-hub": {
       "host": "localhost",
@@ -31,7 +34,8 @@
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
-      "result": 4002    
+      "history": 4002,
+      "result": 4003    
     },
     "ce-delta-hub": {
       "host": "localhost",
@@ -41,7 +45,8 @@
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
-      "result": 4002    
+      "history": 4002,
+      "result": 4003    
     },
     "ce-delta-hub": {
       "host": "localhost",
