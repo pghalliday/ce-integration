@@ -3,7 +3,7 @@ currency-exchange
 
 [![Build Status](https://travis-ci.org/pghalliday/currency-exchange.png?branch=master)](https://travis-ci.org/pghalliday/currency-exchange)
 
-End to end currency exchange integration
+End to end currency exchange implementation
 
 The following components make up the currency exchange infrastructure
 
