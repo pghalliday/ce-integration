@@ -15,7 +15,6 @@ default[:haproxy][:members] = [{
     "port" => "3003"
   }
 ]
-default[:haproxy][:incoming_port] = "3000"
 default[:haproxy][:admin] = {
   "address_bind" => "0.0.0.0",
   "port" => "8000"

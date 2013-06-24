@@ -4,7 +4,7 @@
   "description": "End to end tests of the currency exchange components",
   "config": {
     "host": "localhost",
-    "port": "3000"
+    "port": "80"
   },
   "scripts": {
     "prestart": "grunt",
