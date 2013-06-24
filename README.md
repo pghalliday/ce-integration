@@ -5,7 +5,7 @@ currency-exchange
 
 End to end currency exchange integration
 
-The following components make up the currency exchange infrastucture
+The following components make up the currency exchange infrastructure
 
 ```
                                                            +------------------+        +-----------+
