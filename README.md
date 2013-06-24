@@ -8,36 +8,38 @@ End to end currency exchange integration
 The following components make up the currency exchange infrastucture
 
 ```
-
-                                                             +------------------+        +-----------+
-                                     +--------------+        | ce-operation-hub |        | ce-engine |
-                                     | ce-front-end |        |------------------|        |-----------|
-                                     |--------------+--+---->|                  +--+---->|           |
-                                 +-->|              |  |     | Receives, logs   |  |     | Order     |
-                                 |   |   REST API   |<----+  | and distributes  |  |  +--+ matching  |
-                                 |   |              |  |  |  | operations       |  |  |  |           |
-                                 |   +--------------+  |  |  |                  |  |  |  +-----------+
-                                 |                     |  |  +------------------+  |  |
-                  +-----------+  |                     |  |                        |  |
-+----------+      |  haproxy  |  |   +--------------+  |  |                        |  |  +-----------+
-|          |      |-----------|  |   | ce-front-end |  |  |                        |  |  | ce-engine |
-| Internet |<---->|           |  |   |--------------+--+  |                        +--|->|-----------|
-|          |      | Load      |<-+-->|              |  |  |                        |  |  |           |
-+----------+      | Balancer  |  |   |   REST API   |<----+                        |  +--+ Order     |
-                  |           |  |   |              |  |  |                        |  |  | matching  |
-                  +-----------+  |   +--------------+  |  |                        |  |  |           |
-                                 |                     |  |    +--------------+    |  |  +-----------+
-                                 |                     |  |    | ce-delta-hub |    |  |
-                                 |   +--------------+  |  |    |--------------|    |  |
-                                 |   | ce-front-end |  |  |    |              |    |  |  +-----------+
-                                 |   |--------------+--+  |    | Receives     |    |  |  | ce-engine |
-                                 +-->|              |     |    | market state |    +--|->|-----------|
-                                     |   REST API   |<----+----+ deltas and   |       |  |           |
-                                     |              |          | distributes  |<------+--+ Order     |
-                                     +--------------+          | them         |          | matching  |
-                                                               |              |          |           |
-                                                               +--------------+          +-----------+
+                                                           +------------------+        +-----------+
+                                   +--------------+        | ce-operation-hub |        | ce-engine |
+                                   | ce-front-end |        |------------------|        |-----------|
+                                   |--------------+--+---->|                  +--+---->|           |
+                               +-->|              |  |     | Receives, logs   |  |     | Order     |
+                               |   |   REST API   |<----+  | and distributes  |  |  +--+ matching  |
+                               |   |              |  |  |  | operations       |  |  |  |           |
+                               |   +--------------+  |  |  |                  |  |  |  +-----------+
+                               |                     |  |  +------------------+  |  |
+                +-----------+  |                     |  |                        |  |
++----------+    |  haproxy  |  |   +--------------+  |  |                        |  |  +-----------+
+|          |    |-----------|  |   | ce-front-end |  |  |                        |  |  | ce-engine |
+| Internet |<-->|           |  |   |--------------+--+  |                        +--|->|-----------|
+|          |    | Load      |<-+-->|              |  |  |                        |  |  |           |
++----------+    | Balancer  |  |   |   REST API   |<----+                        |  +--+ Order     |
+                |           |  |   |              |  |  |                        |  |  | matching  |
+                +-----------+  |   +--------------+  |  |                        |  |  |           |
+                               |                     |  |    +--------------+    |  |  +-----------+
+                               |                     |  |    | ce-delta-hub |    |  |
+                               |   +--------------+  |  |    |--------------|    |  |
+                               |   | ce-front-end |  |  |    |              |    |  |  +-----------+
+                               |   |--------------+--+  |    | Receives     |    |  |  | ce-engine |
+                               +-->|              |     |    | market state |    +--|->|-----------|
+                                   |   REST API   |<----+----+ deltas and   |       |  |           |
+                                   |              |          | distributes  |<------+--+ Order     |
+                                   +--------------+          | them         |          | matching  |
+                                                             |              |          |           |
+                                                             +--------------+          +-----------+
 ```
+<!---
+Ascii diagram created using http://www.asciiflow.com/#Draw
+-->
 
 - Each `ce-engine` instance is redundant and will receive all the operations that are submitted to the `ce-operation-hub`
 - Each `ce-front-end` instance will receive every delta so that it has the complete market state and can respond to queries without bothering downstream components
