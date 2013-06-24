@@ -10,8 +10,8 @@ The following components make up the currency exchange infrastructure
 ```
                                                            +------------------+        +-----------+
                                    +--------------+        | ce-operation-hub |        | ce-engine |
-                                   | ce-front-end |        |------------------|--+---->|-----------|
-                                   |--------------+--+---->|                  +  |     |           |
+                                   | ce-front-end |        |------------------+--+---->|-----------|
+                                   |--------------+--+---->|                  |  |     |           |
                                +-->|              |  |     | Receives, logs   |  |  +--+ Order     |
                                |   |   REST API   |<----+  | and distributes  |  |  |  | matching  |
                                |   |              |  |  |  | operations       |  |  |  |           |
