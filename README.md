@@ -9,26 +9,26 @@ The following components make up the currency exchange infrastructure
 
 ```
                                                            +------------------+        +-----------+
-                                   +--------------+        | ce-operation-hub |        | ce-engine |
-                                   | ce-front-end +--+---->|------------------+--+---->|-----------|
-                               +-->|--------------|  |     | Receives, logs   |  |     | Order     |
-                               |   |   REST API   |<----+  | and distributes  |  |  +--+ matching  |
+                                   +--------------+        | ce-operation-hub +--+---->| ce-engine |
+                                   | ce-front-end +--+---->|------------------|  |     |-----------|
+                               +-->|--------------|  |     | Receives, logs   |  |  +--+ Order     |
+                               |   |   REST API   |<----+  | and distributes  |  |  |  | matching  |
                                |   +--------------+  |  |  | operations       |  |  |  +-----------+
                                |                     |  |  +------------------+  |  |
                                |                     |  |                        |  |
                 +-----------+  |   +--------------+  |  |                        |  |  +-----------+
-+----------+    |  haproxy  |  |   | ce-front-end +--+  |                        |  |  | ce-engine |
-| Internet |<-->|-----------|<-+-->|--------------|  |  |                        +--|->|-----------|
-+----------+    | Load      |  |   |   REST API   |<----+                        |  |  | Order     |
-                | Balancer  |  |   +--------------+  |  |                        |  +--+ matching  |
++----------+    |  haproxy  |  |   | ce-front-end +--+  |                        +--|->| ce-engine |
+| Internet |<-->|-----------|<-+-->|--------------|  |  |                        |  |  |-----------|
++----------+    | Load      |  |   |   REST API   |<----+                        |  +--+ Order     |
+                | Balancer  |  |   +--------------+  |  |                        |  |  | matching  |
                 +-----------+  |                     |  |    +--------------+    |  |  +-----------+
                                |                     |  |    | ce-delta-hub |    |  |
                                |   +--------------+  |  |    |--------------|    |  |
                                |   | ce-front-end +--+  |    | Receives     |    |  |  +-----------+
-                               +-->|--------------|     |    | market state |    |  |  | ce-engine |
-                                   |   REST API   |<----+----+ deltas and   |    +--|->|-----------|
-                                   +--------------+          | distributes  |       |  | Order     |
-                                                             | them         |<------+--+ matching  |
+                               +-->|--------------|     |    | market state |    +--|->| ce-engine |
+                                   |   REST API   |<----+----+ deltas and   |       |  |-----------|
+                                   +--------------+          | distributes  |<------+--+ Order     |
+                                                             | them         |          | matching  |
                                                              +--------------+          +-----------+
 ```
 <!---
