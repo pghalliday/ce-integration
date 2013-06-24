@@ -5,16 +5,44 @@ currency-exchange
 
 End to end currency exchange integration
 
-The following VMs will be created by `Vagrant`
+The following components make up the currency exchange infrastucture
 
-Cookbook | Notes | Instances
----|---|:---:
-`test-runner` | This is the machine on which the tests will be run | `test-runner`
-`haproxy` | This is the load balancer | `haproxy`
-`ce-front-end` | Load balanced ce-front-end instances pre-validate operations before passing them to the ce-operation-hub | `ce-front-end-1` `ce-front-end-2` `ce-front-end-3`
-`ce-operation-hub` | Single ce-operation-hub instance ensures that the sequence of operations is logged and broadcasts them to the ce-engine instances | `ce-operation-hub`
-`ce-delta-hub` | Single ce-delta-hub instance synchronises market state between ce-engine instances and ce-front-end instances | `ce-delta-hub`
-`ce-engine` | Redundant ce-engine instances receive and process the operations | `ce-engine-1` `ce-engine-2` `ce-engine-3`
+```
+
+                                                             +------------------+        +-----------+
+                                     +--------------+        | ce-operation-hub |        | ce-engine |
+                                     | ce-front-end |        |------------------|        |-----------|
+                                     |--------------+--+---->|                  +--+---->|           |
+                                 +-->|              |  |     | Receives, logs   |  |     | Order     |
+                                 |   |   REST API   |<----+  | and distributes  |  |  +--+ matching  |
+                                 |   |              |  |  |  | operations       |  |  |  |           |
+                                 |   +--------------+  |  |  |                  |  |  |  +-----------+
+                                 |                     |  |  +------------------+  |  |
+                  +-----------+  |                     |  |                        |  |
++----------+      |  haproxy  |  |   +--------------+  |  |                        |  |  +-----------+
+|          |      |-----------|  |   | ce-front-end |  |  |                        |  |  | ce-engine |
+| Internet |<---->|           |  |   |--------------+--+  |                        +--|->|-----------|
+|          |      | Load      |<-+-->|              |  |  |                        |  |  |           |
++----------+      | Balancer  |  |   |   REST API   |<----+                        |  +--+ Order     |
+                  |           |  |   |              |  |  |                        |  |  | matching  |
+                  +-----------+  |   +--------------+  |  |                        |  |  |           |
+                                 |                     |  |    +--------------+    |  |  +-----------+
+                                 |                     |  |    | ce-delta-hub |    |  |
+                                 |   +--------------+  |  |    |--------------|    |  |
+                                 |   | ce-front-end |  |  |    |              |    |  |  +-----------+
+                                 |   |--------------+--+  |    | Receives     |    |  |  | ce-engine |
+                                 +-->|              |     |    | market state |    +--|->|-----------|
+                                     |   REST API   |<----+----+ deltas and   |       |  |           |
+                                     |              |          | distributes  |<------+--+ Order     |
+                                     +--------------+          | them         |          | matching  |
+                                                               |              |          |           |
+                                                               +--------------+          +-----------+
+```
+
+- Each `ce-engine` instance is redundant and will receive all the operations that are submitted to the `ce-operation-hub`
+- Each `ce-front-end` instance will receive every delta so that it has the complete market state and can respond to queries without bothering downstream components
+- The `ce-delta-hub` instance collects the deltas produced by all the `ce-engine` instances but only forwards one of each to the `ce-front-end` instances
+
 
 ## Contributing
 
