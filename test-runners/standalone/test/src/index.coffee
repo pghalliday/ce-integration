@@ -5,7 +5,7 @@ expect = chai.expect
 ChildDaemon = require 'child-daemon'
 supertest = require 'supertest'
 
-describe 'ce-integration', ->
+describe 'currency-exchange', ->
   it 'should start an end to end system', (done) ->
     this.timeout 5000
     request = supertest 'http://localhost:7000'
