@@ -11,6 +11,9 @@
     }
   },
   "ce-delta-hub": {
+    "commission": {
+      "account": "commission"
+    },
     "ce-front-end": {
       "stream": 7005,
       "state": 7006
@@ -21,6 +24,9 @@
     }
   },
   "ce-engine": [{
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 7002,
@@ -35,6 +41,9 @@
   }],
   "ce-front-end": [{
     "port": 7000,
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "submit": 7001

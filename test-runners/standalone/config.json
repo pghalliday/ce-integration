@@ -11,6 +11,9 @@
     }
   },
   "ce-delta-hub": {
+    "commission": {
+      "account": "commission"
+    },
     "ce-front-end": {
       "stream": 5000,
       "state": 5001
@@ -21,6 +24,9 @@
     }
   },
   "ce-engine": [{
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
@@ -33,6 +39,9 @@
       "state": 5003
     }
   }, {
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
@@ -45,6 +54,9 @@
       "state": 5003
     }  
   }, {
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "stream": 4001,
@@ -59,6 +71,9 @@
   }],
   "ce-front-end": [{
     "port": 3001,
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "submit": 4000
@@ -70,6 +85,9 @@
     }
   }, {
     "port": 3002,
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "submit": 4000
@@ -81,6 +99,9 @@
     }
   }, {
     "port": 3003,
+    "commission": {
+      "account": "commission"
+    },
     "ce-operation-hub": {
       "host": "localhost",
       "submit": 4000
