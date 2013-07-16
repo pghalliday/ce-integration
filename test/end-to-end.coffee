@@ -14,6 +14,15 @@ describe 'Currency Exchange', ->
         .expect(200)
         .expect 'hello', done
 
+    describe '/hal/browser.html', ->
+      it 'should serve the HAL browser', (done) ->
+        request
+        .get('/hal/browser.html')
+        .set('Accept', 'text/html')
+        .expect(200)
+        .expect('Content-Type', /html/)
+        .expect /The HAL Browser/, done
+
     describe '/balances/[account]/', ->
       it 'should respond to GET requests', (done) ->
         request
