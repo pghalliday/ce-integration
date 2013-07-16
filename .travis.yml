@@ -22,14 +22,11 @@ before_install:
  - git submodule update --init --recursive
  - git submodule foreach npm install
  - git submodule foreach npm test
-before_script:
+script:
  - cd test-runners/standalone
  - npm install
  - npm start
- - cd ../..
  - sudo /etc/init.d/haproxy start
-script:
- - cd test-runners/standalone
  - cat out.log
  - cat err.log
  - npm test
