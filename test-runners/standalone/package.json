@@ -22,7 +22,8 @@
     "supertest": "~0.7.0",
     "child-daemon": "0.0.2",
     "grunt-contrib-coffee": "~0.7.0",
-    "grunt-contrib-clean": "~0.4.1"
+    "grunt-contrib-clean": "~0.4.1",
+    "currency-market": "~0.4.1"
   },
   "dependencies": {
     "step": "0.0.5",

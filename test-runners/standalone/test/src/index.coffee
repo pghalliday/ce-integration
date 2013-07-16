@@ -5,6 +5,10 @@ expect = chai.expect
 ChildDaemon = require 'child-daemon'
 supertest = require 'supertest'
 
+Operation = require('currency-market').Operation
+Delta = require('currency-market').Delta
+Amount = require('currency-market').Amount
+
 describe 'currency-exchange', ->
   it 'should start an end to end system', (done) ->
     this.timeout 5000
@@ -23,7 +27,7 @@ describe 'currency-exchange', ->
       .expect('Content-Type', /json/)
       .end (error, response) =>
         expect(error).to.not.be.ok
-        oldBalance = parseFloat response.body
+        oldBalance = parseFloat response.body.funds
         request
         .post('/deposits/Peter/')
         .set('Accept', 'application/json')
@@ -34,13 +38,17 @@ describe 'currency-exchange', ->
         .expect('Content-Type', /json/)
         .end (error, response) =>
           expect(error).to.not.be.ok
-          operation = response.body
+          operationResponse = response.body
+          operation = new Operation
+            exported: operationResponse.operation
           operation.account.should.equal 'Peter'
           operation.sequence.should.be.a 'number'
-          operation.result.should.equal 'success'
           deposit = operation.deposit
           deposit.currency.should.equal 'EUR'
-          deposit.amount.should.equal '50'
+          deposit.amount.compareTo(new Amount '50').should.equal 0
+          delta = new Delta
+            exported: operationResponse.delta
+          delta.result.funds.compareTo(new Amount '50').should.equal 0
           setTimeout =>
             request
             .get('/balances/Peter/EUR')
@@ -49,7 +57,7 @@ describe 'currency-exchange', ->
             .expect('Content-Type', /json/)
             .end (error, response) =>
               expect(error).to.not.be.ok
-              newBalance = parseFloat response.body
+              newBalance = parseFloat response.body.funds
               newBalance.should.equal oldBalance + 50
               childDaemon.stop (error) =>
                 expect(error).to.not.be.ok
