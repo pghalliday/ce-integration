@@ -21,7 +21,7 @@ describe 'currency-exchange', ->
     childDaemon.start (error, matched) =>
       expect(error).to.not.be.ok
       request
-      .get('/balances/Peter/EUR')
+      .get('/accounts/Peter/balances/EUR')
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
@@ -29,7 +29,7 @@ describe 'currency-exchange', ->
         expect(error).to.not.be.ok
         oldBalance = parseFloat response.body.funds
         request
-        .post('/deposits/Peter/')
+        .post('/accounts/Peter/deposits')
         .set('Accept', 'application/json')
         .send
           currency: 'EUR'
@@ -51,7 +51,7 @@ describe 'currency-exchange', ->
           delta.result.funds.compareTo(new Amount '50').should.equal 0
           setTimeout =>
             request
-            .get('/balances/Peter/EUR')
+            .get('/accounts/Peter/balances/EUR')
             .set('Accept', 'application/json')
             .expect(200)
             .expect('Content-Type', /json/)
