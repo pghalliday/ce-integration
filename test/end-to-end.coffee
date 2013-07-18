@@ -13,11 +13,12 @@ describe 'Currency Exchange', ->
         # get current balances
         request
         .get('/accounts/Peter/balances/EUR')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/hal+json')
         .expect(200)
-        .expect('Content-Type', /json/)
+        .expect('Content-Type', /hal\+json/)
         .end (error, response) =>
-          oldBalance = parseFloat response.body.funds
+          halResponse = JSON.parse response.text
+          oldBalance = parseFloat halResponse.funds
           request
           .post('/accounts/Peter/deposits')
           .set('Accept', 'application/json')
@@ -62,11 +63,12 @@ describe 'Currency Exchange', ->
               setTimeout =>
                 request
                 .get('/accounts/Peter/balances/EUR')
-                .set('Accept', 'application/json')
+                .set('Accept', 'application/hal+json')
                 .expect(200)
-                .expect('Content-Type', /json/)
+                .expect('Content-Type', /hal\+json/)
                 .end (error, response) =>
-                  newBalance = parseFloat response.body.funds
+                  halResponse = JSON.parse response.text
+                  newBalance = parseFloat halResponse.funds
                   newBalance.should.equal oldBalance + 200
                   done()
               , 250

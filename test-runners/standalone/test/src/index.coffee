@@ -22,12 +22,13 @@ describe 'currency-exchange', ->
       expect(error).to.not.be.ok
       request
       .get('/accounts/Peter/balances/EUR')
-      .set('Accept', 'application/json')
+      .set('Accept', 'application/hal+json')
       .expect(200)
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /hal\+json/)
       .end (error, response) =>
         expect(error).to.not.be.ok
-        oldBalance = parseFloat response.body.funds
+        halResponse = JSON.parse response.text
+        oldBalance = parseFloat halResponse.funds
         request
         .post('/accounts/Peter/deposits')
         .set('Accept', 'application/json')
@@ -52,12 +53,13 @@ describe 'currency-exchange', ->
           setTimeout =>
             request
             .get('/accounts/Peter/balances/EUR')
-            .set('Accept', 'application/json')
+            .set('Accept', 'application/hal+json')
             .expect(200)
-            .expect('Content-Type', /json/)
+            .expect('Content-Type', /hal\+json/)
             .end (error, response) =>
               expect(error).to.not.be.ok
-              newBalance = parseFloat response.body.funds
+              halResponse = JSON.parse response.text
+              newBalance = parseFloat halResponse.funds
               newBalance.should.equal oldBalance + 50
               childDaemon.stop (error) =>
                 expect(error).to.not.be.ok
