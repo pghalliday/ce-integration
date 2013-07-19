@@ -29,7 +29,8 @@ describe 'Currency Exchange', ->
           .expect('Content-Type', /json/)
           .end (error, response) =>
             expect(error).to.not.be.ok
-            operation = response.body.operation
+            delta = response.body
+            operation = delta.operation
             operation.reference.should.be.a 'string'
             operation.account.should.equal 'Peter'
             operation.sequence.should.be.a 'number'
@@ -38,7 +39,6 @@ describe 'Currency Exchange', ->
             deposit = operation.deposit
             deposit.currency.should.equal 'EUR'
             deposit.amount.should.equal '50'
-            delta = response.body.delta
             delta.result.funds.should.be.a 'string'
             request
             .post('/accounts/Peter/deposits')
@@ -50,13 +50,13 @@ describe 'Currency Exchange', ->
             .expect('Content-Type', /json/)
             .end (error, response) =>
               expect(error).to.not.be.ok
-              operation = response.body.operation
+              delta = response.body
+              operation = delta.operation
               operation.account.should.equal 'Peter'
               operation.sequence.should.be.a 'number'
               deposit = operation.deposit
               deposit.currency.should.equal 'EUR'
               deposit.amount.should.equal '150'
-              delta = response.body.delta
               delta.result.funds.should.be.a 'string'
               error = response.body.error
               expect(error).to.not.be.ok

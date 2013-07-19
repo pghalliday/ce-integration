@@ -39,16 +39,14 @@ describe 'currency-exchange', ->
         .expect('Content-Type', /json/)
         .end (error, response) =>
           expect(error).to.not.be.ok
-          operationResponse = response.body
-          operation = new Operation
-            exported: operationResponse.operation
+          delta = new Delta
+            exported: response.body
+          operation = delta.operation
           operation.account.should.equal 'Peter'
           operation.sequence.should.be.a 'number'
           deposit = operation.deposit
           deposit.currency.should.equal 'EUR'
           deposit.amount.compareTo(new Amount '50').should.equal 0
-          delta = new Delta
-            exported: operationResponse.delta
           delta.result.funds.compareTo(new Amount '50').should.equal 0
           setTimeout =>
             request
