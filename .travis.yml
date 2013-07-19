@@ -25,7 +25,6 @@ before_install:
  - cd test-runners/standalone
  - npm install
 script:
- - cd test-runners/standalone
  - npm start
  - sudo /etc/init.d/haproxy start
  - cat out.log
