@@ -21,44 +21,23 @@ describe 'Currency Exchange', ->
           oldBalance = parseFloat halResponse.funds
           request
           .post('/accounts/Peter/deposits')
-          .set('Accept', 'application/json')
+          .set('Accept', 'application/hal+json')
           .send
             currency: 'EUR'
             amount: '50'
           .expect(200)
-          .expect('Content-Type', /json/)
+          .expect('Content-Type', /hal\+json/)
           .end (error, response) =>
             expect(error).to.not.be.ok
-            delta = response.body
-            operation = delta.operation
-            operation.reference.should.be.a 'string'
-            operation.account.should.equal 'Peter'
-            operation.sequence.should.be.a 'number'
-            operation.timestamp.should.be.at.least startTime
-            operation.timestamp.should.be.at.most Date.now()
-            deposit = operation.deposit
-            deposit.currency.should.equal 'EUR'
-            deposit.amount.should.equal '50'
-            delta.result.funds.should.be.a 'string'
             request
             .post('/accounts/Peter/deposits')
-            .set('Accept', 'application/json')
+            .set('Accept', 'application/hal+json')
             .send
               currency: 'EUR'
               amount: '150'
             .expect(200)
-            .expect('Content-Type', /json/)
+            .expect('Content-Type', /hal\+json/)
             .end (error, response) =>
-              expect(error).to.not.be.ok
-              delta = response.body
-              operation = delta.operation
-              operation.account.should.equal 'Peter'
-              operation.sequence.should.be.a 'number'
-              deposit = operation.deposit
-              deposit.currency.should.equal 'EUR'
-              deposit.amount.should.equal '150'
-              delta.result.funds.should.be.a 'string'
-              error = response.body.error
               expect(error).to.not.be.ok
               setTimeout =>
                 request

@@ -31,23 +31,15 @@ describe 'currency-exchange', ->
         oldBalance = parseFloat halResponse.funds
         request
         .post('/accounts/Peter/deposits')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/hal+json')
         .send
           currency: 'EUR'
           amount: '50'
         .expect(200)
-        .expect('Content-Type', /json/)
+        .expect('Content-Type', /hal\+json/)
         .end (error, response) =>
           expect(error).to.not.be.ok
-          delta = new Delta
-            exported: response.body
-          operation = delta.operation
-          operation.account.should.equal 'Peter'
-          operation.sequence.should.be.a 'number'
-          deposit = operation.deposit
-          deposit.currency.should.equal 'EUR'
-          deposit.amount.compareTo(new Amount '50').should.equal 0
-          delta.result.funds.compareTo(new Amount '50').should.equal 0
+          halResponse = JSON.parse response.text
           setTimeout =>
             request
             .get('/accounts/Peter/balances/EUR')
